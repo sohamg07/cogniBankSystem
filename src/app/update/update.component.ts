@@ -6,6 +6,7 @@ import { SelectService } from '../select.service';
 import { State } from '../../state';
 import { HttpClient } from '@angular/common/http';
 import { customer } from '../customer.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-update',
@@ -20,6 +21,7 @@ export class UpdateComponent implements OnInit {
   details;
 
   constructor(
+    private authService : AuthService,
     private _http: HttpClient,
     private selectService: SelectService,
     private fb : FormBuilder,
@@ -123,5 +125,8 @@ export class UpdateComponent implements OnInit {
     this._router.navigateByUrl("/home")
   }
   
+  onLogout(){
+    this.authService.logout();
+  }
 
 }

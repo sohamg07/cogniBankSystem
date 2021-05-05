@@ -74,6 +74,21 @@
       "accounttype": "salary",
       "panno": "12345BHUR236",
       "id": 5
+    },
+    {
+      "name": "Nitin Shivram Gogate",
+      "username": "nitin",
+      "password": "nitin123",
+      "address": "C/21\nMangal Murti Society\nPune Satara Rd.,Dhankawadi",
+      "country": "3",
+      "state": "9",
+      "email": "gogatenitin@gmail.com",
+      "gender": "male",
+      "contactno": "09922407411",
+      "dob": "2021-04-08",
+      "accounttype": "salary",
+      "panno": "BRUE8956PUNC",
+      "id": 6
     }
   ]
 }

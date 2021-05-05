@@ -46,10 +46,9 @@ export class LoginComponent implements OnInit {
      if(this.loginInfo.invalid){
        return;
      }
-    
     this.authService.login(this.loginInfo.value);
-    this.invalidCredentials();
-    this._router.navigateByUrl('/loan');
+    //this.invalidCredentials();
+    //this._router.navigateByUrl('/home');
    }
  
 

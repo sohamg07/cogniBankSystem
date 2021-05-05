@@ -28,26 +28,25 @@ export class AuthService {
   public login(userInfo: User){
     this.commonservice.getCustomer()
       .subscribe((result) => {
-        console.log(result)
-        console.log(userInfo)
         this.customer=result;
-        console.log(customer)
           for(let items of this.customer){
             if(items.username == userInfo['username'] && items.password == userInfo['password']){
                 localStorage.setItem('token', items.username);
                 console.log("Valid")
-                this.router.navigateByUrl('/loan')
+                this.router.navigateByUrl('/home')
             }
-            else
-            this.invalid();
           }
       }) 
-      console.log(customer)
   }
 
 public invalid(){
   return true;
 } 
+
+public logout(){
+  localStorage.removeItem('token');
+  this.router.navigateByUrl('/login')
+}
 
   public adduser(customer1){
     this.newCustomer = customer1;

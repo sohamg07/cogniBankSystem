@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   constructor(
+    private authService : AuthService,
     private _router : Router
   ) { }
 
@@ -21,5 +23,9 @@ export class HomeComponent implements OnInit {
 
   goToUpdate() {
     this._router.navigateByUrl("/update")
+  }
+
+  onLogout(){
+    this.authService.logout();
   }
 }
