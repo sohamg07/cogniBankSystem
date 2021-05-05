@@ -1,0 +1,209 @@
+<div class="container-fluid register-form" style="background: -webkit-linear-gradient(left, #94c2fa, #63128b);">
+  <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
+    <div class="col-md-12">
+        <h1 style="text-align: center; color:rgb(41, 40, 40);">Banking Management System</h1>
+    </div>
+  </div>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">BMS</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/home">Home</a></li>
+          <li><a href="/loan">Apply for Loan</a></li>
+          <li class="active"><a href="/update">Update Details</a></li>
+        </ul>
+      </div>
+  </nav> 
+  <div class="row" align="center">
+    <div class="form-content">
+        <form id="updateform" [formGroup]="updateInfo" class="form-horizontal" role="form"> 
+        <table class="tablestyle">
+            <tr>
+                <td class="tdcenter"><label for="name">Name:</label></td>
+                <td><input class="form-control" type="text"  name="name" formControlName="name" [(ngModel)]="details.name">
+                    <div *ngIf="!name?.valid && (name?.dirty || name?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!name.errors.required">
+                          &nbsp; Name is required
+                        </div>
+                        <div [hidden]="!name.errors.pattern">
+                            &nbsp; Name should contain only spaces and alphabets
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="username">Username:</label></td>
+                <td><input class="form-control" type="text" id="username" name="username" formControlName="username" [(ngModel)]="details.username">
+                    <div *ngIf="!username?.valid && (username?.dirty || username?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!username.errors.required">
+                          &nbsp; Username is required
+                        </div>
+                        <div *ngIf="updateInfo.get('name').errors.pattern">
+                            &nbsp; Customer name should contain only alphabets and space
+                          </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="password">Password:</label></td>
+                <td><input class="form-control" type="password" id="password" name="password" formControlName="password" [(ngModel)]="details.password">
+                    <div *ngIf="!password?.valid && (password?.dirty || password?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!password.errors.required">
+                          &nbsp; Password is required
+                        </div>
+                    </div>
+                </td>
+                </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="address">Address:</label></td>
+                <td><textarea class="form-control" rows="4" cols="50" id="address" name="address" formControlName="address" [(ngModel)]="details.address"></textarea>
+                    <div *ngIf="!address?.valid && (address?.dirty || address?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!address.errors.required">
+                          &nbsp; Address is required
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="country">Country:</label></td>
+                <td><select (change)="onSelect($event.target.value)" id="inputCountry" class="form-control" [(ngModel)]="details.country"
+                    formControlName="country">
+                    <option value="0">--Select--</option>
+                    <option *ngFor="let country of countries" value= {{country.id}}>{{country.name}}</option>
+                  </select>
+                    <div *ngIf="!country?.valid && (country?.dirty || country?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!country.errors.required">
+                          &nbsp; Country is required
+                        </div>
+                    </div>
+                    
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="state">State:</label></td>
+                <td><select id="state" class="form-control" formControlName="state" [(ngModel)]="details.state">
+                    <option value="0">--Select--</option>
+                    <option *ngFor="let state of states " value= {{state.id}}>{{state.name}}</option>
+                  </select>
+                    <div *ngIf="!state?.valid && (state?.dirty || state?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!state.errors.required">
+                          &nbsp; State is required
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="email">Email Address:</label></td>
+                <td><input class="form-control" type="email" id="email" name="email" formControlName="email" [(ngModel)]="details.email"
+                    [ngClass]="{'is-invalid' : updateInfo.get('email').touched && updateInfo.get('email').invalid}">
+                    <div *ngIf="!email?.valid && (email?.dirty || email?.touched)" style="color: red; font-size: 14px;">
+                        <div *ngIf="updateInfo.get('email').errors.required">
+                          &nbsp; Email Id is required
+                        </div>
+                        <div *ngIf="updateInfo.get('email').errors.email">
+                            &nbsp; Email should be a valid email addess
+                          </div>
+                    </div>   
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="gender">Gender:</label></td>
+                <td><input type="radio"  name="gender" value="male" formControlName="gender" [(ngModel)]="details.gender">
+                    <label for="male">Male</label> &nbsp;&nbsp;
+                    <input type="radio"  name="gender" value="female" formControlName="gender" [(ngModel)]="details.gender">
+                    <label for="female">Female</label>
+                    <div *ngIf="!gender?.valid && (gender?.dirty || gender?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!gender.errors.required">
+                          &nbsp; Gender is required
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="contactno">Contact Number:</label></td>
+                <td><input class="form-control" type="text" id="contactno" name="contactno" formControlName="contactno" [(ngModel)]="details.contactno"
+                    [ngClass]="{'is-invalid' : updateInfo.get('contactno').touched && updateInfo.get('contactno').invalid}">
+                    <div *ngIf="!contactno?.valid && (contactno?.dirty || contactno?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!contactno.errors.required">
+                          &nbsp; Contact Number is required
+                        </div>
+                        <div [hidden]="!contactno.errors.pattern">
+                            &nbsp; Contact Number should contain only numericals
+                        </div>
+                        <div [hidden]="contactno.errors.minLength">
+                            &nbsp; Contact Number should contain 10 Digits
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="dob">Date of Birth:</label></td>
+                <td><input class="form-control" type="date" id="dob" name="dob" formControlName="dob" [(ngModel)]="details.dob">
+                    <div *ngIf="!dob?.valid && (dob?.dirty || dob?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!dob.errors.required">
+                          &nbsp; Date of Birth is required
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td class="tdcenter"><label for="accounttype">Account Type:</label></td>
+                <td><input type="radio"  name="accounttype" value="current" formControlName="accounttype" [(ngModel)]="details.accounttype">
+                    <label for="current">Current</label> &nbsp;&nbsp;
+                    <input type="radio"  name="accounttype" value="salary" formControlName="accounttype" [(ngModel)]="details.accounttype">
+                    <label for="salary">Salary</label> &nbsp;&nbsp;
+                    <input type="radio"  name="accounttype" value="saving" formControlName="accounttype" [(ngModel)]="details.accounttype">
+                    <label for="saving">Saving</label>
+                    <div *ngIf="!accounttype?.valid && (accounttype?.dirty || accounttype?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!accounttype.errors.required">
+                          &nbsp; Account Type is required
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            
+            <tr>
+                <td class="tdcenter"><label for="panno">PAN Number:</label></td>
+                <td><input class="form-control" type="text" id="panno" name="panno" formControlName="panno" minlength="12" maxlength="12"
+                    [(ngModel)]="details.panno">
+                    <div *ngIf="!panno?.valid && (panno?.dirty || panno?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!panno.errors.required">
+                          &nbsp; PAN number is required
+                        </div>
+                        <div [hidden]="updateInfo.get('panno').errors.minLength">
+                            &nbsp; PAN number must be 12 digit
+                        </div>
+                        <div [hidden]="!panno.errors.pattern">
+                            &nbsp; Enter Valid PAN
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <br>
+            </table>
+       
+            <br>
+            <button type="button" class="btn btn-lg" 
+            style="background-color: #141D70; padding-left: 8%; padding-right: 8%; color: white;" 
+            [disabled]="!updateInfo.valid" (click)="goToHome()">
+            Update Details
+          </button>
+        </form> 
+    </div>
+   
+</div>
+
+</div>

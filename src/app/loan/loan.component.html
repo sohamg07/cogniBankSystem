@@ -1,0 +1,189 @@
+<div class="container-fluid register-form" style="background: -webkit-linear-gradient(left, #94c2fa, #63128b);">
+    <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
+      <div class="col-md-12">
+          <h1 style="text-align: center; color:rgb(41, 40, 40);">Banking Management System</h1>
+      </div>
+    </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">BMS</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/home">Home</a></li>
+            <li class="active"><a >Apply for Loan</a></li>
+            <li><a href="/update">Update Details</a></li>
+          </ul>
+        </div>
+    </nav>
+    
+    <div class="row" align="center">
+      <div class="form-content">
+          <form id="Loanform" [formGroup]="loanInfo" class="form-horizontal" role="form"> 
+          <table class="tablestyle">
+            <tr>
+              <td class="tdcenter"><label for="loanType">Loan Type:</label></td>
+              <td><select class="form-control" name="loanType" id="loanType" formControlName="loanType" [(ngModel)]="optionValue">
+                  <option class="form-control" value="Education">Education</option>
+                  <option class="form-control" value="Personal">Personal</option>
+              </select>
+              <div *ngIf="!loanType?.valid && (loanType?.dirty || loanType?.touched)" style="color: red; font-size: 14px;">
+                  <div [hidden]="!loanType.errors.required">
+                    &nbsp; Loan Type is required
+                  </div>
+              </div>
+              </td>
+          </tr>
+          <br>
+            <tr>
+              <td class="tdcenter"><label for="loanAmt">Loan Amount:</label></td>
+              <td><input class="form-control" type="text" id="loanAmt" name="loanAmt" formControlName="loanAmt">
+                  <div *ngIf="!loanAmt?.valid && (loanAmt?.dirty || loanAmt?.touched)" style="color: red; font-size: 14px;">
+                      <div [hidden]="!loanAmt.errors.required">
+                        &nbsp; Loan Amount is required
+                      </div>
+                      <div [hidden]="!loanAmt.errors.pattern">
+                       Enter numeric value
+                    </div>
+                  </div>
+              </td>
+          </tr>
+          <br>
+          <tr>
+            <td class="tdcenter"><label for="applyDate">Loan Apply Date:</label></td> 
+            <td><input class="form-control" type="date" id="applyDate" name="applyDate" formControlName="applyDate"
+               max="{{date | date: 'yyyy-MM-dd' }}">
+                <div *ngIf="!applyDate?.valid && (applyDate?.dirty || applyDate?.touched)" style="color: red; font-size: 14px;">
+                    <div [hidden]="!applyDate.errors.required">
+                      &nbsp; Loan Apply Date is required
+                    </div>
+                </div>
+            </td>
+          </tr>
+          <br>
+   
+
+      <ng-container *ngIf="optionValue == 'Education'">
+              <tr>
+                <td class="tdcenter"><label for="courseFee">Course Fee:</label></td>
+                <td><input class="form-control" type="text" id="courseFee" name="courseFee" formControlName="courseFee">
+                    <div *ngIf="!courseFee?.valid && (courseFee?.dirty || courseFee?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!courseFee.errors.required">
+                          &nbsp; Course Fee is required
+                        </div>
+                        <div [hidden]="!courseFee.errors.pattern">
+                          Enter numeric value
+                       </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="course">Course:</label></td>
+                <td><input class="form-control" type="text" id="course" name="course" formControlName="course">
+                    <div *ngIf="!course?.valid && (course?.dirty || course?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!course.errors.required">
+                          &nbsp; Course is required
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="fatherOcc">Father Occupation:</label></td>
+                <td><input class="form-control" type="text" id="fatherOcc" name="fatherOcc" formControlName="fatherOcc">
+                    <div *ngIf="!fatherOcc?.valid && (fatherOcc?.dirty || fatherOcc?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!fatherOcc.errors.required">
+                          &nbsp; Father Occupation is required
+                        </div>
+                        
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="experience">Father Experience:</label></td>
+                <td><input class="form-control" type="text" id="experience" name="experience" formControlName="experience">
+                    <div *ngIf="!experience?.valid && (experience?.dirty || experience?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!experience.errors.required">
+                          &nbsp; Father Experience is required
+                        </div>
+                        <div [hidden]="!experience.errors.pattern">
+                          Enter numeric value
+                       </div>
+                        
+                    </div>
+                </td>
+              </tr>
+              <br>
+            
+            </ng-container>
+             
+        <ng-container *ngIf="optionValue == 'Personal'">
+              <tr>
+                <td class="tdcenter"><label for="annualIncome">Annual Income:</label></td>
+                <td><input class="form-control" type="text" id="annualIncome" name="annualIncome" formControlName="annualIncome">
+                    <div *ngIf="!annualIncome?.valid && (annualIncome?.dirty || annualIncome?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!annualIncome.errors.required">
+                          &nbsp;Annaul Income is required
+                        </div>
+                        <div [hidden]="!annualIncome.errors.pattern">
+                          Enter numeric value
+                       </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="companyName">Company Name:</label></td>
+                <td><input class="form-control" type="text" id="companyName" name="companyName" formControlName="companyName">
+                    <div *ngIf="!companyName?.valid && (companyName?.dirty || companyName?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!companyName.errors.required">
+                          &nbsp;Company Name is required
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="designation">Designation:</label></td>
+                <td><input class="form-control" type="text" id="designation" name="designation" formControlName="designation">
+                    <div *ngIf="!designation?.valid && (designation?.dirty || designation?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!designation.errors.required">
+                          &nbsp;Designation is required
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="perosnalExperience">Personal Experience:</label></td>
+                <td><input class="form-control" type="text" id="perosnalExperience" name="perosnalExperience" formControlName="perosnalExperience">
+                    <div *ngIf="!perosnalExperience?.valid && (perosnalExperience?.dirty || perosnalExperience?.touched)" style="color: red; font-size: 14px;">
+                        <div [hidden]="!perosnalExperience.errors.required">
+                          &nbsp;Experience is required
+                        </div>
+                        <div [hidden]="!perosnalExperience.errors.pattern">
+                          Enter numeric value
+                       </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+         
+            </ng-container>
+
+          </table>
+          
+          <button type="button" class="btn btn-lg" 
+          style="background-color: #141D70; padding-left: 8%; padding-right: 8%; color: white; align-content: center;" 
+           (click)="goToHome()">
+         Apply for Loan
+          </button>
+          </form>
+        </div>
+
+    </div>
+    
+  
+</div>
