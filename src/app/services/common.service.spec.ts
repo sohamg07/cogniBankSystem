@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -15,6 +15,7 @@ describe('CommonService', () => {
         providers: [CommonService, AuthService, FormBuilder]
     });
     service = TestBed.inject(CommonService);
+    const httpMock = TestBed.get(HttpTestingController);
   });
 
   it('should be created', () => {
