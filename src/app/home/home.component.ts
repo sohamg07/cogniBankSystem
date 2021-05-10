@@ -1,11 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthGuard } from '../shared/auth.guard';
+import { AuthService } from '../services/auth.service';
+import { CommonService } from '../services/common.service';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
 
@@ -24,7 +32,7 @@ export class HomeComponent implements OnInit {
   goToUpdate() {
     this._router.navigateByUrl("/update")
   }
-
+ 
   onLogout(){
     this.authService.logout();
   }

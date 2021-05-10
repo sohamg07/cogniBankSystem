@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background: -webkit-linear-gradient(left, #94c2fa, #63128b);">
+<div class="container-fluid bodybackground">
 <div id="loginbox" style="margin-top:220px;margin-bottom: 220px; " class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
   <div class="panel panel-info" >
       <div class="panel-heading">
@@ -14,18 +14,17 @@
             <div style="margin-bottom: 25px" class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
               <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Username" formControlName="username">                                        
-              <div *ngIf="!username?.valid && (username?.dirty || username?.touched)" style="color: red; font-size: 14px;">
+              <div *ngIf="!username?.valid && (username?.dirty || username?.touched)" class="errorAlert">
                 <div [hidden]="!username.errors.required">
                   &nbsp; Username is required
                 </div>
               </div>
             </div>
-            
-                      
+              
             <div style="margin-bottom: 25px" class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
               <input id="login-password" type="password" class="form-control" name="password" placeholder="Password" formControlName="password">
-              <div *ngIf="!password?.valid && (password?.dirty ||password?.touched)" style="color: red; font-size: 14px;">
+              <div *ngIf="!password?.valid && (password?.dirty ||password?.touched)" class="errorAlert">
                 <div [hidden]="!password.errors.required">
                   &nbsp; Password is required
                 </div>
@@ -35,15 +34,14 @@
 
             <div style="margin-top:10px" class="form-group">
               <div class="col-sm-12 controls">
-                <button type="button" class="btn btn-sm" 
-                style="background-color: #141D70; padding-left: 8%; padding-right: 8%; color: white;" 
+                <button type="button" class="btn btn-sm commonButton"  
                  [disabled]="!loginInfo.valid" (click)="goToHome();">
                 LOGIN
               </button>
               </div>
             </div>
 
-            <div *ngIf="[invalidcredentials]" style="color: red; font-size: 14px;">
+            <div *ngIf="[invalidcredentials]" class="errorAlert">
               <div [hidden]="invalidcredentials === false">
                 &nbsp; Invalid credentials
               </div>
@@ -54,7 +52,7 @@
               <div class="col-md-12 control">
                 <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                   Don't have an account! <br>
-                  <button type="button" class="btn btn-sm" 
+                  <button type="button" class="btn btn-sm register" 
                   style="background-color: #169747; padding-left: 8%; padding-right: 8%; color: white;" 
                   (click)="goToRegister()">
                 Register

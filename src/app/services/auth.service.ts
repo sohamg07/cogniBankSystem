@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { customer } from 'src/app/customer.model'
+import { customer } from 'src/app/shared/customer.model'
 import { CommonService } from './common.service';
-import { LoginComponent } from './login/login.component';
-import { User } from './user';
+import { LoginComponent } from '../login/login.component';
+import { User } from '../shared/user';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
  
   newCustomer = {};
@@ -39,20 +40,11 @@ export class AuthService {
       }) 
   }
 
-public invalid(){
-  return true;
-} 
-
 public logout(){
   localStorage.removeItem('token');
   this.router.navigateByUrl('/login')
 }
 
-  public adduser(customer1){
-    this.newCustomer = customer1;
-    console.log(this.newCustomer)
-  }
-  
   isloggedIn(){
     return localStorage.getItem('token') !== null;
   }

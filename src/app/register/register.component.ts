@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { DatePipe } from '@angular/common';
-import { CommonService } from '../common.service';
-import { Country } from '../../country';
-import { SelectService } from '../select.service';
-import { State } from '../../state';
+import { CommonService } from '../services/common.service';
+import { Country } from '../services/country';
+import { SelectService } from '../services/select.service';
+import { State } from '../services/state';
 
-
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [DatePipe],
 })
 
 export class RegisterComponent implements OnInit {
@@ -22,14 +23,14 @@ export class RegisterComponent implements OnInit {
   selectedCountry: Country = new Country(2, 'Brazil');
   countries: Country[];
   states: State[];
+  component: any;
 
   constructor(
     private selectService: SelectService,
-    private commonservice : CommonService,
+    private commonService : CommonService,
     private authService: AuthService,
-    private fb : FormBuilder,
-    private _router : Router,
-    public DatePipe : DatePipe
+    private formBuilder : FormBuilder,
+    private _router : Router
   ) {
   }
   
@@ -38,11 +39,12 @@ export class RegisterComponent implements OnInit {
     this.onSelect(this.selectedCountry.id);
   }
 
-  onSelect(countryid) {
-    this.states = this.selectService.getStates().filter((item) => item.countryid == countryid);
+  onSelect(countryId) {
+    this.states = this.selectService.getStates().filter((item) => item.countryid == countryId);
+    console.log(this.states);
   }
 
-  RegistrationInfo = this.fb.group({
+  registrationInfo = this.formBuilder.group({
     name: [ '', [ Validators.required, Validators.pattern("^[a-zA-Z ]+$")]],
     username : [ '', [ Validators.required ] ],
     password: [ '', [ Validators.required ]],
@@ -51,69 +53,67 @@ export class RegisterComponent implements OnInit {
     state : [ '', [ Validators.required ] ],
     email : [ '', [ Validators.required , Validators.email ]],
     gender : [ '', [ Validators.required ] ],
-    contactno : [ '', [ Validators.required,Validators.minLength(10),Validators.pattern("^[0-9]+$")] ],
+    contactNo : [ '', [ Validators.required,Validators.minLength(10),Validators.pattern("^[0-9]+$")] ],
     dob : [ '', [ Validators.required ] ],
-    accounttype : [ '', [ Validators.required ] ],
-    panno : [ '', [ Validators.required , Validators.minLength(12),Validators.pattern("^[a-zA-Z0-9_]*$")] ],
-   
-  });
+    accountType : [ '', [ Validators.required ] ],
+    panNo : [ '', [ Validators.required , Validators.minLength(12),Validators.pattern("^[a-zA-Z0-9_]*$")] ],
+  }); 
 
   get name() {
-    return this.RegistrationInfo.get('name');
+    return this.registrationInfo.get('name');
   }
 
   get username() {
-    return this.RegistrationInfo.get('username');
+    return this.registrationInfo.get('username');
   }
 
   get password() {
-    return this.RegistrationInfo.get('password');
+    return this.registrationInfo.get('password');
   }
 
   get address() {
-    return this.RegistrationInfo.get('address');
+    return this.registrationInfo.get('address');
   }
 
   get country() {
-    return this.RegistrationInfo.get('country');
+    return this.registrationInfo.get('country');
   }
 
   get state() {
-    return this.RegistrationInfo.get('state');
+    return this.registrationInfo.get('state');
   }
 
   get email() {
-    return this.RegistrationInfo.get('email');
+    return this.registrationInfo.get('email');
   }
 
   get gender() {
-    return this.RegistrationInfo.get('gender');
+    return this.registrationInfo.get('gender');
   }
 
-  get contactno() {
-    return this.RegistrationInfo.get('contactno');
+  get contactNo() {
+    return this.registrationInfo.get('contactNo');
   }
 
   get dob() {
-    return this.RegistrationInfo.get('dob');
+    return this.registrationInfo.get('dob');
   }
 
-  get accounttype() {
-    return this.RegistrationInfo.get('accounttype');
+  get accountType() {
+    return this.registrationInfo.get('accountType');
   }
 
-  get panno() {
-    return this.RegistrationInfo.get('panno');
+  get panNo() {
+    return this.registrationInfo.get('panNo');
   }
 
   goToLogin() {
-    console.log(this.RegistrationInfo.value)
-    if(this.RegistrationInfo.invalid)
+    console.log(this.registrationInfo.value)
+    if(this.registrationInfo.invalid)
       return;
-    this.commonservice.createCustomer(this.RegistrationInfo.value).subscribe((response)=>{
+    this.commonService.createCustomer(this.registrationInfo.value).subscribe((response)=>{
         console.log("Customer has been registered")
     })
-    this.authService.adduser(this.RegistrationInfo.value);
     this._router.navigateByUrl("/login")
   }
 }

@@ -1,13 +1,13 @@
-<div class="container-fluid register-form" style="background: -webkit-linear-gradient(left, #94c2fa, #63128b);">
+<div class="container-fluid bodybackground">
     <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
       <div class="col-md-12">
-          <h1 style="text-align: center; color:rgb(41, 40, 40);">Banking Management System</h1>
+          <h1 class="BMSHead">Banking Management System</h1>
       </div>
     </div>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">BMS</a>
+            <a class="navbar-brand" href="">BMS</a>
           </div>
           <ul class="nav navbar-nav">
             <li><a href="/home">Home</a></li>
@@ -31,7 +31,7 @@
                   <option class="form-control" value="Education">Education</option>
                   <option class="form-control" value="Personal">Personal</option>
               </select>
-              <div *ngIf="!loanType?.valid && (loanType?.dirty || loanType?.touched)" style="color: red; font-size: 14px;">
+              <div *ngIf="!loanType?.valid && (loanType?.dirty || loanType?.touched)" class="errorAlert">
                   <div [hidden]="!loanType.errors.required">
                     &nbsp; Loan Type is required
                   </div>
@@ -42,7 +42,7 @@
             <tr>
               <td class="tdcenter"><label for="loanAmt">Loan Amount:</label></td>
               <td><input class="form-control" type="text" id="loanAmt" name="loanAmt" formControlName="loanAmt">
-                  <div *ngIf="!loanAmt?.valid && (loanAmt?.dirty || loanAmt?.touched)" style="color: red; font-size: 14px;">
+                  <div *ngIf="!loanAmt?.valid && (loanAmt?.dirty || loanAmt?.touched)" class="errorAlert">
                       <div [hidden]="!loanAmt.errors.required">
                         &nbsp; Loan Amount is required
                       </div>
@@ -57,7 +57,7 @@
             <td class="tdcenter"><label for="applyDate">Loan Apply Date:</label></td> 
             <td><input class="form-control" type="date" id="applyDate" name="applyDate" formControlName="applyDate"
                max="{{date | date: 'yyyy-MM-dd' }}">
-                <div *ngIf="!applyDate?.valid && (applyDate?.dirty || applyDate?.touched)" style="color: red; font-size: 14px;">
+                <div *ngIf="!applyDate?.valid && (applyDate?.dirty || applyDate?.touched)" class="errorAlert">
                     <div [hidden]="!applyDate.errors.required">
                       &nbsp; Loan Apply Date is required
                     </div>
@@ -69,7 +69,7 @@
             <td class="tdcenter"><label for="rateOfInterest">Rate of Interest:</label></td> 
             <td><input class="form-control" type="text" id="rateOfInterest" name="rateOfInterest" formControlName="rateOfInterest"
               [(ngModel)]="ROI">
-                <div *ngIf="!rateOfInterest?.valid && (rateOfInterest?.dirty || rateOfInterest?.touched)" style="color: red; font-size: 14px;">
+                <div *ngIf="!rateOfInterest?.valid && (rateOfInterest?.dirty || rateOfInterest?.touched)" class="errorAlert">
                     <div [hidden]="!rateOfInterest.errors.required">
                       &nbsp; ROI is required
                     </div>
@@ -85,7 +85,7 @@
               <option value="15">15</option>
               <option value="20">20</option>
             </select>
-                <div *ngIf="!duration?.valid && (duration?.dirty || duration?.touched)" style="color: red; font-size: 14px;">
+                <div *ngIf="!duration?.valid && (duration?.dirty || duration?.touched)" class="errorAlert">
                     <div [hidden]="!duration.errors.required">
                       &nbsp; Duartion is required
                     </div>
@@ -96,10 +96,11 @@
    
 
       <ng-container *ngIf="optionValue == 'Education'">
+        <app-educationloan></app-educationloan>
               <tr>
                 <td class="tdcenter"><label for="courseFee">Course Fee:</label></td>
                 <td><input class="form-control" type="text" id="courseFee" name="courseFee" formControlName="courseFee">
-                    <div *ngIf="!courseFee?.valid && (courseFee?.dirty || courseFee?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!courseFee?.valid && (courseFee?.dirty || courseFee?.touched)" class="errorAlert">
                         <div [hidden]="!courseFee.errors.required">
                           &nbsp; Course Fee is required
                         </div>
@@ -113,7 +114,7 @@
               <tr>
                 <td class="tdcenter"><label for="course">Course:</label></td>
                 <td><input class="form-control" type="text" id="course" name="course" formControlName="course">
-                    <div *ngIf="!course?.valid && (course?.dirty || course?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!course?.valid && (course?.dirty || course?.touched)" class="errorAlert">
                         <div [hidden]="!course.errors.required">
                           &nbsp; Course is required
                         </div>
@@ -124,7 +125,7 @@
               <tr>
                 <td class="tdcenter"><label for="fatherOcc">Father Occupation:</label></td>
                 <td><input class="form-control" type="text" id="fatherOcc" name="fatherOcc" formControlName="fatherOcc">
-                    <div *ngIf="!fatherOcc?.valid && (fatherOcc?.dirty || fatherOcc?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!fatherOcc?.valid && (fatherOcc?.dirty || fatherOcc?.touched)" class="errorAlert">
                         <div [hidden]="!fatherOcc.errors.required">
                           &nbsp; Father Occupation is required
                         </div>
@@ -136,7 +137,7 @@
               <tr>
                 <td class="tdcenter"><label for="experience">Father Experience:</label></td>
                 <td><input class="form-control" type="text" id="experience" name="experience" formControlName="experience">
-                    <div *ngIf="!experience?.valid && (experience?.dirty || experience?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!experience?.valid && (experience?.dirty || experience?.touched)" class="errorAlert">
                         <div [hidden]="!experience.errors.required">
                           &nbsp; Father Experience is required
                         </div>
@@ -150,7 +151,7 @@
               <tr>
                 <td class="tdcenter"><label for="rationCard">Ration Card Number</label></td>
                 <td><input class="form-control" type="text" id="rationCard" name="rationCard" formControlName="rationCard">
-                    <div *ngIf="!rationCard?.valid && (rationCard?.dirty || rationCard?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!rationCard?.valid && (rationCard?.dirty || rationCard?.touched)" class="errorAlert">
                         <div [hidden]="!rationCard.errors.required">
                           &nbsp; Ration Card Number is required
                         </div>
@@ -161,7 +162,7 @@
               <tr>
                 <td class="tdcenter"><label for="fatherAnnualIncome">Father's Annual Income:</label></td>
                 <td><input class="form-control" type="text" id="fatherAnnualIncome" name="fatherAnnualIncome" formControlName="fatherAnnualIncome">
-                    <div *ngIf="!fatherAnnualIncome?.valid && (fatherAnnualIncome?.dirty || fatherAnnualIncome?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!fatherAnnualIncome?.valid && (fatherAnnualIncome?.dirty || fatherAnnualIncome?.touched)" class="errorAlert">
                         <div [hidden]="!fatherAnnualIncome.errors.required">
                           &nbsp; Father Annaul Income is required
                         </div>
@@ -176,10 +177,12 @@
             </ng-container>
              
         <ng-container *ngIf="optionValue == 'Personal'">
+              
+              <app-personalloan></app-personalloan>
               <tr>
                 <td class="tdcenter"><label for="annualIncome">Annual Income:</label></td>
                 <td><input class="form-control" type="text" id="annualIncome" name="annualIncome" formControlName="annualIncome">
-                    <div *ngIf="!annualIncome?.valid && (annualIncome?.dirty || annualIncome?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!annualIncome?.valid && (annualIncome?.dirty || annualIncome?.touched)" class="errorAlert">
                         <div [hidden]="!annualIncome.errors.required">
                           &nbsp;Annaul Income is required
                         </div>
@@ -193,7 +196,7 @@
               <tr>
                 <td class="tdcenter"><label for="companyName">Company Name:</label></td>
                 <td><input class="form-control" type="text" id="companyName" name="companyName" formControlName="companyName">
-                    <div *ngIf="!companyName?.valid && (companyName?.dirty || companyName?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!companyName?.valid && (companyName?.dirty || companyName?.touched)" class="errorAlert">
                         <div [hidden]="!companyName.errors.required">
                           &nbsp;Company Name is required
                         </div>
@@ -204,7 +207,7 @@
               <tr>
                 <td class="tdcenter"><label for="designation">Designation:</label></td>
                 <td><input class="form-control" type="text" id="designation" name="designation" formControlName="designation">
-                    <div *ngIf="!designation?.valid && (designation?.dirty || designation?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!designation?.valid && (designation?.dirty || designation?.touched)" class="errorAlert">
                         <div [hidden]="!designation.errors.required">
                           &nbsp;Designation is required
                         </div>
@@ -215,7 +218,7 @@
               <tr>
                 <td class="tdcenter"><label for="perosnalExperience">Personal Experience:</label></td>
                 <td><input class="form-control" type="text" id="perosnalExperience" name="perosnalExperience" formControlName="perosnalExperience">
-                    <div *ngIf="!perosnalExperience?.valid && (perosnalExperience?.dirty || perosnalExperience?.touched)" style="color: red; font-size: 14px;">
+                    <div *ngIf="!perosnalExperience?.valid && (perosnalExperience?.dirty || perosnalExperience?.touched)" class="errorAlert">
                         <div [hidden]="!perosnalExperience.errors.required">
                           &nbsp;Experience is required
                         </div>
@@ -231,8 +234,7 @@
 
           </table>
           
-          <button type="button" class="btn btn-lg" 
-          style="background-color: #141D70; padding-left: 8%; padding-right: 8%; color: white; align-content: center;" 
+          <button type="button" class="btn btn-lg commonButton"
            (click)="goToHome()">
          Apply for Loan
           </button>

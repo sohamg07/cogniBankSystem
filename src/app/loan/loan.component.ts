@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CommonService } from '../common.service';
-import { AuthService } from '../auth.service';
+import { CommonService } from '../services/common.service';
+import { AuthService } from '../services/auth.service';
 
+@Injectable({
+  providedIn: 'root'
+}) 
 @Component({
   selector: 'app-loan',
   templateUrl: './loan.component.html',
@@ -15,15 +18,15 @@ export class LoanComponent implements OnInit {
   date = new Date
   constructor(
     private authService : AuthService,
-    private commonservice : CommonService,
-    private fb : FormBuilder,
+    private commonService : CommonService,
+    private formBuilder : FormBuilder,
     private _router : Router
   ) { }
 
   ngOnInit(): void {
   } 
 
-  loanInfo = this.fb.group({
+  loanInfo = this.formBuilder.group({
     loanType : [ '', [ Validators.required ]],
     loanAmt : [ '', [ Validators.required,Validators.pattern("^[0-9]+$") ]],
     applyDate : [ '', [ Validators.required ]],
@@ -51,6 +54,7 @@ export class LoanComponent implements OnInit {
     if(this.optionValue === "Personal")
     this.ROI = '8';
   }
+  
   get loanType() {
     return this.loanInfo.get('loanType');
   }
@@ -112,7 +116,7 @@ export class LoanComponent implements OnInit {
   }
 
   goToHome() {
-    // this.commonservice.createCustomer(this.loanInfo.value).subscribe((response)=>{
+    // this.commonService.createCustomer(this.loanInfo.value).subscribe((response)=>{
     //   console.log("Loan Data added to database")
     // })
     this._router.navigateByUrl("/home")

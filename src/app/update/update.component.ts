@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Country } from '../../country';
-import { SelectService } from '../select.service';
-import { State } from '../../state';
+import { Country } from '../services/country';
+import { SelectService } from '../services/select.service';
+import { State } from '../services/state';
 import { HttpClient } from '@angular/common/http';
-import { customer } from '../customer.model';
-import { AuthService } from '../auth.service';
+import { customer } from '../shared/customer.model';
+import { AuthService } from '../services/auth.service';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-update',
@@ -18,13 +22,13 @@ export class UpdateComponent implements OnInit {
   countries: Country[];
   states: State[];
   object2;
-  details;
+  details ; 
 
   constructor(
     private authService : AuthService,
     private _http: HttpClient,
     private selectService: SelectService,
-    private fb : FormBuilder,
+    private formBuilder : FormBuilder,
     private _router : Router
   ) { } 
 
@@ -40,16 +44,14 @@ export class UpdateComponent implements OnInit {
         }
       }
       })
+      console.log(this.object2)
     this.countries = this.selectService.getCountries();
     this.onSelect(this.selectedCountry.id);
-  }
-
-  onSelect(countryid) {
-    this.states = this.selectService.getStates().filter((item) => item.countryid == countryid);
   } 
 
-  updateInfo = this.fb.group({
-    name: [ '', [ Validators.required, Validators.pattern("^[a-zA-Z ]+$")]],
+
+  updateInfo = this.formBuilder.group({
+    name : [ '', [ Validators.required, Validators.pattern("^[a-zA-Z ]+$")]],
     username : [ '', [ Validators.required ] ],
     password: [ '', [ Validators.required ]],
     address : [ '', [ Validators.required ] ],
@@ -57,10 +59,10 @@ export class UpdateComponent implements OnInit {
     state : [ '', [ Validators.required ] ],
     email : [ '', [ Validators.required , Validators.email ]],
     gender : [ '', [ Validators.required ] ],
-    contactno : [ '', [ Validators.required,Validators.minLength(10),Validators.pattern("^[0-9]+$")] ],
+    contactNo : [ '', [ Validators.required,Validators.minLength(10),Validators.pattern("^[0-9]+$")] ],
     dob : [ '', [ Validators.required ] ],
-    accounttype : [ '', [ Validators.required ] ],
-    panno : [ '', [ Validators.required , Validators.minLength(12),Validators.pattern("^[a-zA-Z0-9_]*$")] ],
+    accountType : [ '', [ Validators.required ] ],
+    panNo : [ '', [ Validators.required , Validators.minLength(12),Validators.pattern("^[a-zA-Z0-9_]*$")] ],
   });
 
   get name() {
@@ -95,33 +97,34 @@ export class UpdateComponent implements OnInit {
     return this.updateInfo.get('gender');
   }
 
-  get contactno() {
-    return this.updateInfo.get('contactno');
+  get contactNo() {
+    return this.updateInfo.get('contactNo');
   }
 
   get dob() {
     return this.updateInfo.get('dob');
   }
 
-  get accounttype() {
-    return this.updateInfo.get('accounttype');
+  get accountType() {
+    return this.updateInfo.get('accountType');
   }
 
-  get panno() {
-    return this.updateInfo.get('panno');
+  get panNo() {
+    return this.updateInfo.get('panNo');
+  }
+
+  onSelect(countryId) {
+    this.states = this.selectService.getStates().filter((item) => item.countryid == countryId);
   }
 
   goToHome(){
+    if(this.updateInfo.invalid){
+      return;
+    }
     console.log(this.details);
     var url="http://localhost:3000/customer/"+this.details.id;
     console.log(url);
     this._http.put<any>(url, this.details).subscribe();
-    //this.isSubmitted = true;
-    if(this.updateInfo.invalid){
-      return;
-    }
-
-    this._router.navigateByUrl('/loan');
     this._router.navigateByUrl("/home")
   }
   

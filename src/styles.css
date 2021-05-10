@@ -8,3 +8,27 @@
     border-left: 5px solid #a94442;
     /* red */
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.errorAlert{
+    color: red; 
+    font-size: 14px;
+}
+
+.bodybackground{
+    background: -webkit-linear-gradient(left, #94c2fa, #63128b);
+}
+
+.BMSHead{
+    text-align: center; 
+    color:rgb(41, 40, 40);
+}
+
+.commonButton{
+    background-color: #141D70; 
+    padding-left: 8%; 
+    padding-right: 8%; 
+    color: white; 
+    align-content: center;
+}
