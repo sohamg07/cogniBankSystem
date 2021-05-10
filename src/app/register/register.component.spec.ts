@@ -91,29 +91,6 @@ describe('RegisterComponent', () => {
   expect(spy).toHaveBeenCalledWith('/login');
  });
 
-//  it('Should go call the createcustomer method in authservice',()=>{
-//   let service = TestBed.inject(CommonService);
-//   let spy = spyOn(service , 'createCustomer').and.returnValues
-
-//   component.registrationInfo.controls.name.setValue("Soham")
-//   component.registrationInfo.controls.username.setValue("sohamg07")
-//   component.registrationInfo.controls.password.setValue("soham123")
-//   component.registrationInfo.controls.address.setValue("Dhankawdi,Pune")
-//   component.registrationInfo.controls.country.setValue("India")
-//   component.registrationInfo.controls.state.setValue("Pune")
-//   component.registrationInfo.controls.email.setValue("soham@gmail.com")
-//   component.registrationInfo.controls.gender.setValue("male")
-//   component.registrationInfo.controls.contactNo.setValue("8983449375")
-//   component.registrationInfo.controls.dob.setValue("1998-07-07")
-//   component.registrationInfo.controls.accountType.setValue("savings")
-//   component.registrationInfo.controls.panNo.setValue("BUEG123654IY")
-
-//   component.goToLogin();
-//   fixture.detectChanges();
-
-//   expect(spy).toHaveBeenCalled();
-//  });
-
  it('Should not go to login if registrationInfo is invalid',()=>{
   let router = TestBed.get(Router);
   let spy = spyOn(router, 'navigateByUrl');
