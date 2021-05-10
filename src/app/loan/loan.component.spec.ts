@@ -76,6 +76,13 @@ describe('LoanComponent', () => {
       expect(component.ROI).toBe('8');
  });
 
+ it('should call loogout from authservice',()=>{
+  let service = TestBed.get(AuthService);
+  let spy = spyOn(service, 'logout');
 
+  component.onLogout();
+
+  expect(spy).toHaveBeenCalled();
+});
 });
 

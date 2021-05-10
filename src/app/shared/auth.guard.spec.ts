@@ -21,4 +21,11 @@ describe('AuthGuard', () => {
   it('should be created', () => {
     expect(guard).toBeTruthy();
   });
+
+  it('should be call canActivate created', () => {
+    let value = guard.canActivate();
+    let spy = spyOn(guard,'canActivate');
+    
+    expect(value).toBeFalsy();
+  });
 });

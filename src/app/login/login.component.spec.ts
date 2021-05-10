@@ -56,6 +56,29 @@ describe('LoginComponent', () => {
   expect(spy).toHaveBeenCalledWith('/register');
   });
 
+  it('should not log in the user if login info is invalid',()=>{
+    let router = TestBed.get(Router);
+    let spy = spyOn(router, 'navigateByUrl');
+  
+    component.goToHome();
+  
+    expect(spy).not.toHaveBeenCalledOnceWith('/home')
+    });
+
+    it('should call the login function from authservice',()=>{
+      let service = TestBed.get(AuthService);
+      let spy = spyOn(service, 'login');
+      
+      component.loginInfo.controls.username.setValue("sohamg07")
+      component.loginInfo.controls.password.setValue("soham123")
+    
+      component.goToHome();
+      fixture.debugElement;
+
+      expect(spy).toHaveBeenCalled();
+    });
+  
+
 });
 
 

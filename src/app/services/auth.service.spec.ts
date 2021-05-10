@@ -3,6 +3,7 @@ import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { LoginComponent } from '../login/login.component';
 
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
@@ -26,12 +27,26 @@ describe('AuthService', () => {
     var userdata = { username: "sohamg07" , password : "soham123"}
     let router = TestBed.get(Router);
     let spy = spyOn(router, 'navigateByUrl');
+    let commonService = TestBed.get(CommonService);
+    let component = TestBed.get(LoginComponent);
     
+    commonService.getCustomer().subscribe((userdata)=>{
+      expect(userdata).toMatch;
+      expect(localStorage).toBe("sohamg07");
+      expect(spy).toHaveBeenCalledWith('/home');
+    });
     service.login(userdata);
-    
-    expect(spy).not.toHaveBeenCalledWith('/home');
+    component.goToHome();  
   });
 
+  it('should log out the user and route to login page', () => {
+    let router = TestBed.get(Router);
+    let spy = spyOn(router, 'navigateByUrl');
 
+    service.logout();
+
+    expect(localStorage).toBeNull;
+    expect(spy).toHaveBeenCalledWith('/login');
+  });
 });
  
