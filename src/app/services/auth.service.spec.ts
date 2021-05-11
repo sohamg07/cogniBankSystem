@@ -1,9 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { async, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { LoginComponent } from '../login/login.component';
 
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
@@ -31,6 +30,14 @@ describe('AuthService', () => {
 
     expect(localStorage).toBeNull;
     expect(spy).toHaveBeenCalledWith('/login');
+  });
+
+  it('should call onInit', () => {
+    let spy = spyOn(service , "ngOnInit");
+    
+    service.ngOnInit;
+
+    expect(spy).not.toHaveBeenCalled();
   });
 });
  

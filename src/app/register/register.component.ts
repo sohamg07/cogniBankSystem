@@ -112,8 +112,8 @@ export class RegisterComponent implements OnInit {
     if(this.registrationInfo.invalid)
       return;
     this.commonService.createCustomer(this.registrationInfo.value).subscribe((response)=>{
-        console.log("Customer has been registered")
     })
+    console.log("Customer has been registered")
     this._router.navigateByUrl("/login")
   }
 }
